@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "513587324270",
+    "project_id": "pns-order",
+    "storage_bucket": "pns-order.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:513587324270:android:39c394e57a418db4378d7f",
+        "android_client_info": {
+          "package_name": "com.example.dad3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDI6C8FVg74M1mD_23DhEE83HNfXGg-Z4k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
