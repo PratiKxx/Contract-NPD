@@ -1,13 +1,29 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
+import 'watermark.dart';
 import 'main.dart';
 
 class addnote extends StatelessWidget {
-  TextEditingController name = TextEditingController();
-  TextEditingController subject1 = TextEditingController();
-  TextEditingController subject2 = TextEditingController();
-  TextEditingController subject3 = TextEditingController();
+
+
+TextEditingController contno = TextEditingController();
+TextEditingController date = TextEditingController();
+TextEditingController seller = TextEditingController();
+TextEditingController buyer = TextEditingController();
+TextEditingController billingname = TextEditingController();
+TextEditingController gstno = TextEditingController();
+TextEditingController qual = TextEditingController();
+TextEditingController Transport = TextEditingController();
+TextEditingController quant = TextEditingController();
+TextEditingController yarn = TextEditingController();
+TextEditingController weight = TextEditingController();
+TextEditingController ratem = TextEditingController();
+TextEditingController delper = TextEditingController();
+TextEditingController PC = TextEditingController();
+TextEditingController brokerage = TextEditingController();
+TextEditingController Others = TextEditingController();
+TextEditingController remarks = TextEditingController();
+
 
   CollectionReference ref = FirebaseFirestore.instance.collection('report');
 
@@ -22,17 +38,35 @@ class addnote extends StatelessWidget {
           MaterialButton(
             onPressed: () {
               ref.add({
-                'name': name.text,
-                'Maths': subject1.text,
-                'Science': subject2.text,
-                'History': subject3.text
+               
+                'Contract No': contno.text,
+                'Date': date.text,
+                'Seller': seller.text,
+                'Buyer': buyer.text,
+                'Billing Name': billingname.text,
+                'GST no': gstno.text,
+                'Quality': qual.text,
+                'Transport': Transport.text,
+                'Quantity': quant.text,
+                
+                'Yarn': yarn.text,
+                'Weight': weight.text,
+                'Rate/m': ratem.text,
+                'Delivery Period': delper.text,
+                'Payment Condition': PC.text,
+                'Brokerage': brokerage.text,
+                'Others': Others.text,
+                'Remarks': remarks.text
+
+
+
               }).whenComplete(() {
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => const Home()));
               });
             },
             child: const Text(
-              "save",
+              "Save",
               style: TextStyle(
                 fontSize: 20,
                 color: Color.fromARGB(255, 251, 251, 251),
@@ -54,15 +88,18 @@ class addnote extends StatelessWidget {
           ),
         ],
       ),
+      
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
-                controller: name,
+                controller: contno,
                 decoration: const InputDecoration(
-                  hintText: 'name',
+                   hintText: 'Contract No',
+                  labelText: 'Contract No', // Set the label text
+                  // floatingLabelBehavior: FloatingLabelBehavior.never,
                 ),
               ),
             ),
@@ -72,11 +109,10 @@ class addnote extends StatelessWidget {
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
-                controller: subject1,
-                maxLines: null,
-                keyboardType: TextInputType.number,
+                controller: date,
                 decoration: const InputDecoration(
-                  hintText: 'Maths',
+                  hintText: 'Date',
+                  labelText: 'Date',
                 ),
               ),
             ),
@@ -86,11 +122,10 @@ class addnote extends StatelessWidget {
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
-                controller: subject2,
-                maxLines: null,
-                keyboardType: TextInputType.number,
+                controller: seller,
                 decoration: const InputDecoration(
-                  hintText: 'Science',
+                  hintText: 'Seller',
+                  labelText: 'Seller',
                 ),
               ),
             ),
@@ -100,14 +135,187 @@ class addnote extends StatelessWidget {
             Container(
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
-                controller: subject3,
-                maxLines: null,
-                keyboardType: TextInputType.number,
+                controller: buyer,
                 decoration: const InputDecoration(
-                  hintText: 'History',
+                  hintText: 'Buyer',
+                  labelText: 'Buyer',
                 ),
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: billingname,
+                decoration: const InputDecoration(
+                  hintText: 'Billing Name',
+                  labelText: 'Billing Name',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: gstno,
+                decoration: const InputDecoration(
+                  hintText: 'GST no',
+                  labelText: 'GST no',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: qual,
+                decoration: const InputDecoration(
+                  hintText: 'Quality',
+                  labelText: 'Quality',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: quant,
+                decoration: const InputDecoration(
+                  hintText: 'Quantity',
+                  labelText: 'Quantity',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: Transport,
+                decoration: const InputDecoration(
+                  hintText: 'Transport',
+                  labelText: 'Transport',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: yarn,
+                decoration: const InputDecoration(
+                  hintText: 'Yarn',
+                  labelText: 'Yarn',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: weight,
+                decoration: const InputDecoration(
+                  hintText: 'Weight',
+                  labelText: 'Weight',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: ratem,
+                decoration: const InputDecoration(
+                  hintText: 'Rate/m',
+                  labelText: 'Rate/m',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: delper,
+                decoration: const InputDecoration(
+                  hintText: 'Delivery Period',
+                  labelText: 'Delivery Period',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: PC,
+                decoration: const InputDecoration(
+                  hintText: 'Payment Condition',
+                  labelText: 'Payment Condition',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: brokerage,
+                decoration: const InputDecoration(
+                  hintText: 'Brokerage',
+                  labelText: 'Brokerage',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: Others,
+                decoration: const InputDecoration(
+                  hintText: 'Others',
+                  labelText: 'Others',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              decoration: BoxDecoration(border: Border.all()),
+              child: TextField(
+                controller: remarks,
+                decoration: const InputDecoration(
+                  hintText: 'Remarks',
+                  labelText: 'Remarks',
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+
+
           ],
         ),
       ),

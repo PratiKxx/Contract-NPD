@@ -1,34 +1,72 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-
 import 'main.dart';
 import 'report.dart';
+import 'watermark.dart';
 
 class editnote extends StatefulWidget {
   DocumentSnapshot docid;
-  editnote({super.key, required this.docid});
+  editnote({Key? key, required this.docid}) : super(key: key);
 
   @override
-  _editnoteState createState() => _editnoteState(docid: docid);
+  _editnoteState createState() => _editnoteState();
 }
 
 class _editnoteState extends State<editnote> {
-  DocumentSnapshot docid;
-  _editnoteState({required this.docid});
-  TextEditingController name = TextEditingController();
-  TextEditingController subject1 = TextEditingController();
-  TextEditingController subject2 = TextEditingController();
-  TextEditingController subject3 = TextEditingController();
+  late TextEditingController contno;
+  late TextEditingController date;
+  late TextEditingController seller;
+  late TextEditingController buyer;
+  late TextEditingController billingname;
+  late TextEditingController gstno;
+  late TextEditingController qual;
+  late TextEditingController Transport;
+  late TextEditingController quant;
+  late TextEditingController yarn;
+  late TextEditingController weight;
+  late TextEditingController ratem;
+  late TextEditingController delper;
+  late TextEditingController PC;
+  late TextEditingController brokerage;
+  late TextEditingController Others;
+  late TextEditingController remarks;
 
-  @override
-  void initState() {
-    name = TextEditingController(text: widget.docid.get('name'));
-    subject1 = TextEditingController(text: widget.docid.get('Maths'));
-    subject2 = TextEditingController(text: widget.docid.get('Science'));
-    subject3 = TextEditingController(text: widget.docid.get('History'));
+ @override
+void initState() {
+  super.initState();
 
-    super.initState();
+  print('widget.docid: ${widget.docid}');
+  Map<String, dynamic>? data = widget.docid.data() as Map<String, dynamic>?;
+
+  contno = TextEditingController(text: data?['Contract No'] as String? ?? '');
+  date = TextEditingController(text: data?['Date'] as String? ?? '');
+  seller = TextEditingController(text: data?['Seller'] as String? ?? '');
+  buyer = TextEditingController(text: data?['Buyer'] as String? ?? '');
+  billingname = TextEditingController(text: data?['Billing Name'] as String? ?? '');
+  gstno = TextEditingController(text: data?['GST no'] as String? ?? '');
+  qual = TextEditingController(text: data?['Quality'] as String? ?? '');
+  Transport = TextEditingController(text: data?['Transport'] as String? ?? '');
+  quant = TextEditingController(text: data?['Quantity'] as String? ?? '');
+  yarn = TextEditingController(text: data?['Yarn'] as String? ?? '');
+  weight = TextEditingController(text: data?['Weight'] as String? ?? '');
+  ratem = TextEditingController(text: data?['Rate/m'] as String? ?? '');
+  delper = TextEditingController(text: data?['Delivery Period'] as String? ?? '');
+  PC = TextEditingController(text: data?['Payment Condition'] as String? ?? '');
+  brokerage = TextEditingController(text: data?['Brokerage'] as String? ?? '');
+  Others = TextEditingController(text: data?['Others'] as String? ?? '');
+  remarks = TextEditingController(text: data?['Remarks'] as String? ?? '');
+
+  if (data != null) {
+    print('Retrieved data: $data');
+  } else {
+    print('Error retrieving data: Data is null');
   }
+}
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -52,17 +90,30 @@ class _editnoteState extends State<editnote> {
           MaterialButton(
             onPressed: () {
               widget.docid.reference.update({
-                'name': name.text,
-                'Maths': subject1.text,
-                'Science': subject2.text,
-                'History': subject3.text
+                'Contract No': contno.text,
+                'Date': date.text,
+                'Seller': seller.text,
+                'Buyer': buyer.text,
+                'Billing Name': billingname.text,
+                'GST no': gstno.text,
+                'Quality': qual.text,
+                'Quantity': quant.text,
+                'Transport': Transport.text,
+                'Yarn': yarn.text,
+                'Weight': weight.text,
+                'Rate/m': ratem.text,
+                'Delivery Period': delper.text,
+                'Payment Condition': PC.text,
+                'Brokerage': brokerage.text,
+                'Others': Others.text,
+                'Remarks': remarks.text
               }).whenComplete(() {
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => const Home()));
               });
             },
             child: const Text(
-              "save",
+              "Save",
               style: TextStyle(
                 fontSize: 20,
                 color: Color.fromARGB(255, 251, 251, 251),
@@ -77,7 +128,7 @@ class _editnoteState extends State<editnote> {
               });
             },
             child: const Text(
-              "delete",
+              "Delete",
               style: TextStyle(
                 fontSize: 20,
                 color: Color.fromARGB(255, 251, 251, 251),
@@ -96,9 +147,11 @@ class _editnoteState extends State<editnote> {
               Container(
                 decoration: BoxDecoration(border: Border.all()),
                 child: TextField(
-                  controller: name,
+                  controller: contno,
                   decoration: const InputDecoration(
-                    hintText: 'name',
+                     hintText: 'Contract No',
+                    labelText: 'Contract No', // Set the label text
+                  floatingLabelBehavior: FloatingLabelBehavior.never,
                   ),
                 ),
               ),
@@ -108,11 +161,11 @@ class _editnoteState extends State<editnote> {
               Container(
                 decoration: BoxDecoration(border: Border.all()),
                 child: TextField(
-                  controller: subject1,
+                  controller: date,
                   maxLines: null,
-                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    hintText: 'Maths',
+                    hintText: 'Date',
+                    labelText: 'Date',
                   ),
                 ),
               ),
@@ -122,11 +175,11 @@ class _editnoteState extends State<editnote> {
               Container(
                 decoration: BoxDecoration(border: Border.all()),
                 child: TextField(
-                  controller: subject2,
+                  controller: seller,
                   maxLines: null,
-                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    hintText: 'Science',
+                    hintText: 'Seller',
+                    labelText: 'Seller',
                   ),
                 ),
               ),
@@ -136,31 +189,235 @@ class _editnoteState extends State<editnote> {
               Container(
                 decoration: BoxDecoration(border: Border.all()),
                 child: TextField(
-                  controller: subject3,
+                  controller: buyer,
                   maxLines: null,
-                  keyboardType: TextInputType.number,
                   decoration: const InputDecoration(
-                    hintText: 'History',
+                    hintText: 'Buyer',
+                    labelText: 'Buyer',
                   ),
                 ),
               ),
               const SizedBox(
-                height: 20,
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: billingname,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Billing Name',
+                    labelText: 'Billing Name',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: gstno,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'GST no',
+                    labelText: 'GST no',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: qual,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Quality',
+                    labelText: 'Quality',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: quant,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Quality',
+                    labelText: 'Quantity',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: Transport,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Transport',
+                    labelText: 'Transport',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: yarn,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Yarn',
+                    labelText: 'Yarn',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: weight,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Weight',
+
+                    labelText: 'Weight',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: ratem,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Rate/m',
+                    labelText: 'Rate/m',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: delper,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Delivery Period',
+                    labelText: 'Delivery Period',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: PC,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Payment Condition',
+                    labelText: 'Payment Condition',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: brokerage,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Brokerage',
+                    labelText: 'Brokerage',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: Others,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Others',
+                    labelText: 'Others',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                decoration: BoxDecoration(border: Border.all()),
+                child: TextField(
+                  controller: remarks,
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Remarks',
+                    labelText: 'Remarks',
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
               ),
               MaterialButton(
                 color: const Color.fromARGB(255, 0, 11, 133),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => reportt(
-                        docid: docid,
+                  try {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => reportt(
+                          docid: widget.docid,
+                          contno: contno.text,
+                          date: date.text,
+                          seller: seller.text,
+                          buyer: buyer.text,
+                          billingname: billingname.text,
+                          gstno: gstno.text,
+                          qual: qual.text,
+                          Transport: Transport.text,
+                          quant: quant.text,
+                          yarn: yarn.text,
+                          weight: weight.text,
+                          ratem: ratem.text,
+                          delper: delper.text,
+                          PC: PC.text,
+                          brokerage: brokerage.text,
+                          Others: Others.text,
+                          remarks: remarks.text,
+                        ),
                       ),
-                    ),
-                  );
+                    );
+                  } catch (e) {
+                    print('Error navigating to editnote page: $e');
+                  }
                 },
                 child: const Text(
-                  "Make Report",
+                  "Convert to PDF",
                   style: TextStyle(
                     fontSize: 20,
                     color: Color.fromARGB(255, 251, 251, 251),
