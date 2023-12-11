@@ -188,31 +188,36 @@ class _HomeState extends State<Home> {
         ),
       ),
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 0, 11, 133),
-        title: const Text(
-          'Contracts',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-        actions: [
-          // Search bar in the AppBar
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () async {
-              final String? result = await showSearch<String>(
-                context: context,
-                delegate: DataSearch(filteredData),
-              );
+  backgroundColor: const Color.fromARGB(255, 0, 11, 133),
+  title: const Text(
+    'Contracts',
+    style: TextStyle(
+      color: Colors.white,
+    ),
+  ),
+  iconTheme: IconThemeData(
+    color: Colors.white, // Change the color here
+  ),
+  actions: [
+    // Search bar in the AppBar
+    IconButton(
+      icon: const Icon(Icons.search),
+      color: Colors.white,
+      onPressed: () async {
+        final String? result = await showSearch<String>(
+          context: context,
+          delegate: DataSearch(filteredData),
+        );
 
-              if (result != null) {
-                // Perform actions based on the search result if needed
-                print('Search result: $result');
-              }
-            },
-          ),
-        ],
-      ),
+        if (result != null) {
+          // Perform actions based on the search result if needed
+          print('Search result: $result');
+        }
+      },
+    ),
+  ],
+),
+
       body: Stack(
         children: [
           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -233,7 +238,8 @@ class _HomeState extends State<Home> {
                   snapshot.data!.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
 
               // Sort the data based on the "Contract No" field in descending order
-              data.sort((a, b) => b['Contract No'].compareTo(a['Contract No']));
+              data.sort((a, b) => int.parse(b['Contract No']).compareTo(int.parse(a['Contract No'])));
+
 
               // Set filtered data to display based on the search
               filteredData = data;
@@ -332,26 +338,26 @@ class DataSearch extends SearchDelegate<String> {
   DataSearch(this.data);
 
   @override
-  List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: const Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
-  }
+List<Widget> buildActions(BuildContext context) {
+  return [
+    IconButton(
+      icon: const Icon(Icons.clear, color: Colors.white),
+      onPressed: () {
+        query = '';
+      },
+    ),
+  ];
+}
 
   @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(
-      icon: const Icon(Icons.arrow_back),
-      onPressed: () {
-        close(context, '');
-      },
-    );
-  }
+Widget buildLeading(BuildContext context) {
+  return IconButton(
+    icon: const Icon(Icons.arrow_back, color: Colors.white),
+    onPressed: () {
+      close(context, '');
+    },
+  );
+}
 
   @override
   Widget buildResults(BuildContext context) {

@@ -3,31 +3,52 @@ import 'package:flutter/material.dart';
 import 'watermark.dart';
 import 'main.dart';
 
-class addnote extends StatelessWidget {
+class addnote extends StatefulWidget {
+  addnote({Key? key}) : super(key: key);
 
+  @override
+  _addnoteState createState() => _addnoteState();
+}
 
-TextEditingController contno = TextEditingController();
-TextEditingController date = TextEditingController();
-TextEditingController seller = TextEditingController();
-TextEditingController buyer = TextEditingController();
-TextEditingController billingname = TextEditingController();
-TextEditingController gstno = TextEditingController();
-TextEditingController qual = TextEditingController();
-TextEditingController Transport = TextEditingController();
-TextEditingController quant = TextEditingController();
-TextEditingController yarn = TextEditingController();
-TextEditingController weight = TextEditingController();
-TextEditingController ratem = TextEditingController();
-TextEditingController delper = TextEditingController();
-TextEditingController PC = TextEditingController();
-TextEditingController brokerage = TextEditingController();
-TextEditingController Others = TextEditingController();
-TextEditingController remarks = TextEditingController();
-
+class _addnoteState extends State<addnote> {
+  TextEditingController contno = TextEditingController();
+  TextEditingController date = TextEditingController();
+  TextEditingController seller = TextEditingController();
+  TextEditingController buyer = TextEditingController();
+  TextEditingController billingname = TextEditingController();
+  TextEditingController gstno = TextEditingController();
+  TextEditingController qual = TextEditingController();
+  TextEditingController Transport = TextEditingController();
+  TextEditingController quant = TextEditingController();
+  TextEditingController yarn = TextEditingController();
+  TextEditingController weight = TextEditingController();
+  TextEditingController ratem = TextEditingController();
+  TextEditingController delper = TextEditingController();
+  TextEditingController PC = TextEditingController();
+  TextEditingController brokerage = TextEditingController();
+  TextEditingController Others = TextEditingController();
+  TextEditingController remarks = TextEditingController();
 
   CollectionReference ref = FirebaseFirestore.instance.collection('report');
 
-  addnote({super.key});
+  @override
+  void initState() {
+    super.initState();
+    // Set the initial value of the 'date' controller to the current date
+    setDate();
+  }
+
+  void setDate() {
+    // Get the current date
+    DateTime now = DateTime.now();
+
+    // Format the date as DD/MM/YYYY
+    String formattedDate =
+        "${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year}";
+
+    // Set the formatted date to the 'date' controller
+    date.text = formattedDate;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +57,11 @@ TextEditingController remarks = TextEditingController();
         backgroundColor: const Color.fromARGB(255, 0, 11, 133),
         actions: [
           MaterialButton(
-            onPressed: () {
-              ref.add({
+  onPressed: () {
+    // Check if the Contract No field is not empty
+    if (contno.text.isNotEmpty) {
+      // Add the data to Firestore
+      ref.add({
                
                 'Contract No': contno.text,
                 'Date': date.text,
@@ -61,19 +85,27 @@ TextEditingController remarks = TextEditingController();
 
 
               }).whenComplete(() {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => const Home()));
-              });
-            },
-            child: const Text(
-              "Save",
-              style: TextStyle(
-                fontSize: 20,
-                color: Color.fromARGB(255, 251, 251, 251),
-              ),
-            ),
-          ),
-          MaterialButton(
+        Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => const Home()));
+      });
+    } else {
+      // Show a message if Contract No is not filled
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: const Text('Contract No cannot be empty.'),
+        ),
+      );
+    }
+  },
+  child: const Text(
+    "Save",
+    style: TextStyle(
+      fontSize: 20,
+      color: Color.fromARGB(255, 251, 251, 251),
+    ),
+  ),
+),
+MaterialButton(
             onPressed: () {
               Navigator.pushReplacement(
                   context, MaterialPageRoute(builder: (_) => const Home()));
@@ -96,6 +128,8 @@ TextEditingController remarks = TextEditingController();
               decoration: BoxDecoration(border: Border.all()),
               child: TextField(
                 controller: contno,
+                keyboardType: TextInputType.number,
+
                 decoration: const InputDecoration(
                    hintText: 'Contract No',
                   labelText: 'Contract No', // Set the label text
