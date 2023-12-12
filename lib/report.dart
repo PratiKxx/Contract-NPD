@@ -1,5 +1,3 @@
-
-
 // import 'dart:typed_data';
 
 // import 'package:flutter/material.dart';
@@ -393,23 +391,22 @@
 //                     ),
 //                     pw.Divider() ,
 //                     pw.SizedBox(height: 40),
-                    
+
 //                     pw.Text(
 //                       'Developed By Pratik Nareshkumar Daga',
 //                       style: pw.TextStyle(
 //                         fontSize: 20,
 //                         fontWeight: pw.FontWeight.bold,
 //                       ),
-//                     ), 
+//                     ),
 //               ],
 //             ),
 //           );
 //         },
-        
-        
+
 //       ),
 //     );
-    
+
 //     return doc.save();
 //   }
 // }
@@ -424,9 +421,24 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class reportt extends StatefulWidget {
   DocumentSnapshot docid;
-  String contno, date, seller, buyer, billingname, gstno, qual, Transport, quant, yarn,
+  String contno,
+      date,
+      seller,
+      buyer,
+      billingname,
+      gstno,
+      qual,
+      Transport,
+      quant,
+      yarn,
       // ignore: non_constant_identifier_names
-      weight, ratem, delper, PC, brokerage, Others, remarks;
+      weight,
+      ratem,
+      delper,
+      PC,
+      brokerage,
+      Others,
+      remarks;
 
   // ignore: use_key_in_widget_constructors
   reportt({
@@ -479,7 +491,7 @@ class _reporttState extends State<reportt> {
             marginBottom: 0,
             marginLeft: 0,
             marginRight: 0,
-            marginTop: 20,
+            marginTop: 15,
           ),
           orientation: pw.PageOrientation.portrait,
           theme: pw.ThemeData.withFont(
@@ -502,12 +514,12 @@ class _reporttState extends State<reportt> {
                       fontWeight: pw.FontWeight.bold,
                       fontStyle: pw.FontStyle.italic,
                     ),
-                  // ),
-                  // pw.Text(
-                  //   widget.date,
-                  //   style: pw.TextStyle(
-                  //     fontSize: 20,
-                  //   ),
+                    // ),
+                    // pw.Text(
+                    //   widget.date,
+                    //   style: pw.TextStyle(
+                    //     fontSize: 20,
+                    //   ),
                   ),
                 ],
               ),
@@ -521,12 +533,12 @@ class _reporttState extends State<reportt> {
                       fontWeight: pw.FontWeight.bold,
                       fontStyle: pw.FontStyle.italic,
                     ),
-                  // ),
-                  // pw.Text(
-                  //   widget.date,
-                  //   style: pw.TextStyle(
-                  //     fontSize: 20,
-                  //   ),
+                    // ),
+                    // pw.Text(
+                    //   widget.date,
+                    //   style: pw.TextStyle(
+                    //     fontSize: 20,
+                    //   ),
                   ),
                 ],
               ),
@@ -534,22 +546,41 @@ class _reporttState extends State<reportt> {
                 mainAxisAlignment: pw.MainAxisAlignment.center,
                 children: [
                   pw.Text(
-                    '(9373275765 | 9423275765(w) | pnareshdaga@gmail.com)',
+                    ' 9373275765 | 9423275765(w) | pnareshdaga@gmail.com ',
                     style: pw.TextStyle(
                       fontSize: 20,
                       fontWeight: pw.FontWeight.bold,
                       fontStyle: pw.FontStyle.italic,
                     ),
-                  // ),
-                  // pw.Text(
-                  //   widget.date,
-                  //   style: pw.TextStyle(
-                  //     fontSize: 20,
-                  //   ),
+                    // ),
+                    // pw.Text(
+                    //   widget.date,
+                    //   style: pw.TextStyle(
+                    //     fontSize: 20,
+                    //   ),
                   ),
                 ],
               ),
-              pw.SizedBox(height: 20),
+              pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.center,
+                children: [
+                  pw.Text(
+                    ' ALL TYPES OF GREY FABRIC COMMISSION AGENT',
+                    style: pw.TextStyle(
+                      fontSize: 20,
+                      // fontWeight: pw.FontWeight.bold,
+                      fontStyle: pw.FontStyle.italic,
+                    ),
+                    // ),
+                    // pw.Text(
+                    //   widget.date,
+                    //   style: pw.TextStyle(
+                    //     fontSize: 20,
+                    //   ),
+                  ),
+                ],
+              ),
+              pw.SizedBox(height: 1),
               pw.Divider(),
               pw.SizedBox(height: 10),
               pw.Row(
@@ -561,7 +592,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -580,7 +610,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -599,7 +628,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -618,7 +646,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -637,7 +664,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -656,7 +682,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -675,7 +700,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -694,7 +718,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -713,7 +736,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -724,7 +746,7 @@ class _reporttState extends State<reportt> {
                   ),
                 ],
               ),
-              
+
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.start,
                 children: [
@@ -733,7 +755,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -752,7 +773,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -771,7 +791,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -782,7 +801,7 @@ class _reporttState extends State<reportt> {
                   ),
                 ],
               ),
-              
+
               pw.Row(
                 mainAxisAlignment: pw.MainAxisAlignment.start,
                 children: [
@@ -791,7 +810,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -810,7 +828,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -829,7 +846,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -848,7 +864,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -867,7 +882,6 @@ class _reporttState extends State<reportt> {
                     style: pw.TextStyle(
                       fontSize: 24,
                       fontWeight: pw.FontWeight.bold,
-
                     ),
                   ),
                   pw.Text(
@@ -967,8 +981,6 @@ class _reporttState extends State<reportt> {
                       fontStyle: pw.FontStyle.italic,
                     ),
                   ),
-                  
-                  
                 ),
               ),
             ],
@@ -980,5 +992,3 @@ class _reporttState extends State<reportt> {
     return doc.save();
   }
 }
-
-

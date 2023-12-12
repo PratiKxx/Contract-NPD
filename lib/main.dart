@@ -1,125 +1,4 @@
-  
-  // class Home extends StatefulWidget {
-  //   const Home({super.key});
-
-  //   @override
-  //   _HomeState createState() => _HomeState();
-  // }
-
-  // class _HomeState extends State<Home> {
-  //   final Stream<QuerySnapshot<Map<String, dynamic>>> _usersStream =
-  //     FirebaseFirestore.instance.collection('report').snapshots();
-  //   @override
-  //   Widget build(BuildContext context) {
-  //     return Scaffold(
-  //       floatingActionButton: FloatingActionButton(
-  //         backgroundColor: const Color.fromARGB(255, 0, 11, 133),
-  //         onPressed: () {
-  //           Navigator.pushReplacement(
-  //               context, MaterialPageRoute(builder: (_) => addnote()));
-  //         },
-  //         child: const Icon(
-  //           Icons.add,
-  //           color: Colors.white,
-  //         ),
-  //       ),
-  //       appBar: AppBar(
-  //         backgroundColor: const Color.fromARGB(255, 0, 11, 133),
-  //         // title: const Text('Contracts'),
-  //         title: const Text(
-  //   'Contracts',
-  //   style: TextStyle(
-  //     color: Colors.white,
-  //   ),
-  // ),
-
-  //       ),
-  //       body: Stack(
-  //         children: [ 
-  //       StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
-  //   stream: _usersStream,
-  //   builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-  //     if (snapshot.hasError) {
-  //       return const Text("Something is wrong");
-  //     }
-  //     if (snapshot.connectionState == ConnectionState.waiting) {
-  //       return const Center(
-  //         child: CircularProgressIndicator(),
-  //       );
-  //     }
-
-  //     return ListView.builder(
-  //   itemCount: snapshot.data!.docs.length,
-  //   itemBuilder: (_, index) {
-  //     // Extracting data from the document
-  //     Map<String, dynamic> data = snapshot.data!.docs[index].data() as Map<String, dynamic>;
-
-  //     // Sorting the data based on the "Contract No" field
-  //     List<Map<String, dynamic>> sortedData = snapshot.data!.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
-  //     sortedData.sort((a, b) => b['Contract No'].compareTo(a['Contract No']));
-
-  //     return GestureDetector(
-  //       onTap: () {
-  //         Navigator.pushReplacement(
-  //           context,
-  //           MaterialPageRoute(
-  //             builder: (_) => editnote(docid: snapshot.data!.docs[index]),
-  //           ),
-  //         );
-  //       },
-  //       child: Column(
-  //         children: [
-  //           const SizedBox(
-  //             height: 4,
-  //           ),
-  //           Padding(
-  //             padding: const EdgeInsets.only(
-  //               left: 3,
-  //               right: 3,
-  //             ),
-  //             child: ListTile(
-  //               shape: RoundedRectangleBorder(
-  //                 borderRadius: BorderRadius.circular(10),
-  //                 side: const BorderSide(
-  //                   color: Colors.black,
-  //                 ),
-  //               ),
-  //               title: Text(
-  //                 'Contract No: ${sortedData[index]['Contract No']}',
-  //                 style: const TextStyle(
-  //                   fontSize: 20,
-  //                 ),
-  //               ),
-  //               subtitle: Column(
-  //                 crossAxisAlignment: CrossAxisAlignment.start,
-  //                 children: [
-  //                   Text('Date : ${sortedData[index]['Date']}'),
-  //                   Text('Buyer: ${sortedData[index]['Buyer']}'),
-  //                   Text('Seller: ${sortedData[index]['Seller']}'),
-  //                   // Add more fields as needed
-  //                 ],
-  //               ),
-  //               contentPadding: const EdgeInsets.symmetric(
-  //                 vertical: 12,
-  //                 horizontal: 16,
-  //               ),
-  //             ),
-  //           ),
-  //         ],
-  //       ),
-  //     );
-  //   },
-  // );
-
-  //   },
-  // ),
-  //       Watermark(),
-  //         ],
-  //       ),
-  //     );
-  //   }
-  // }
- import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'firebase_options.dart';
@@ -147,10 +26,13 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Student report",
+      title: "CONTRACTS for NPDaga",
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 0, 11, 133),
+        colorScheme: ColorScheme.light().copyWith(
+          background: const Color(0xFFF4EDE0), // Set background color
+        ),
       ),
       home: const Home(),
     );
@@ -165,65 +47,111 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  final Stream<QuerySnapshot<Map<String, dynamic>>> _usersStream =
-      FirebaseFirestore.instance.collection('report').snapshots();
+  final Stream<QuerySnapshot<Map<String, dynamic>>> _usersStream = FirebaseFirestore.instance.collection('report').snapshots();
 
   // Filtered data to display based on search
   List<Map<String, dynamic>> filteredData = [];
 
+  Future<int> getTotalContracts() async {
+    final QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance.collection('report').get();
+
+    return snapshot.size;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: const Color.fromARGB(255, 0, 11, 133),
-        onPressed: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (_) => addnote()),
-          );
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+      floatingActionButton: Container(
+        margin: const EdgeInsets.only(bottom: 30.0), // Adjust the margin as needed
+        child: FloatingActionButton(
+          backgroundColor: const Color.fromARGB(255, 0, 11, 133),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (_) => addnote()),
+            );
+          },
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
         ),
       ),
       appBar: AppBar(
-  backgroundColor: const Color.fromARGB(255, 0, 11, 133),
-  title: const Text(
-    'Contracts',
-    style: TextStyle(
-      color: Colors.white,
-    ),
-  ),
-  iconTheme: IconThemeData(
-    color: Colors.white, // Change the color here
-  ),
-  actions: [
-    // Search bar in the AppBar
-    IconButton(
-      icon: const Icon(Icons.search),
-      color: Colors.white,
-      onPressed: () async {
-        final String? result = await showSearch<String>(
-          context: context,
-          delegate: DataSearch(filteredData),
-        );
+        toolbarHeight: 70,
+        backgroundColor: const Color.fromARGB(255, 0, 11, 133),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'ＣＯＮＴＲＡＣＴＳ',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20, // Adjust the font size
+                fontWeight: FontWeight.bold, // Make it bold
+                letterSpacing: 2.0, // Add letter spacing
+                // fontStyle: FontStyle.italic, // Use italic style
+                // decoration: TextDecoration.underline, // Add an underline
+                decorationColor: Color(0xFFF4EDE0), // Set underline color
+                decorationThickness: 2.0, // Set underline thickness
+                shadows: [
+                  Shadow(
+                    blurRadius: 4.0,
+                    color: Colors.black,
+                    offset: Offset(2.0, 2.0),
+                  ),
+                ],
+              ),
+            ),
+            FutureBuilder<int>(
+              future: getTotalContracts(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                  );
+                } else if (snapshot.hasError) {
+                  return const Text('Error loading contracts');
+                } else {
+                  return Text(
+                    '  Total Contracts: ${snapshot.data}',
+                    style: const TextStyle(
+                      fontSize: 12,
+                      color: Colors.white,
+                    ),
+                  );
+                }
+              },
+            ),
+          ],
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.white, // Change the color here
+        ),
+        actions: [
+          // Search bar in the AppBar
+          IconButton(
+            icon: const Icon(Icons.search),
+            color: Colors.white,
+            onPressed: () async {
+              final String? result = await showSearch<String>(
+                context: context,
+                delegate: DataSearch(filteredData),
+              );
 
-        if (result != null) {
-          // Perform actions based on the search result if needed
-          print('Search result: $result');
-        }
-      },
-    ),
-  ],
-),
-
+              if (result != null) {
+                // Perform actions based on the search result if needed
+                print('Search result: $result');
+              }
+            },
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
             stream: _usersStream,
-            builder: (BuildContext context,
-                AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
               if (snapshot.hasError) {
                 return const Text("Something is wrong");
               }
@@ -234,87 +162,79 @@ class _HomeState extends State<Home> {
               }
 
               // Extracting data from the documents
-              List<Map<String, dynamic>> data =
-                  snapshot.data!.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+              List<Map<String, dynamic>> data = snapshot.data!.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
 
               // Sort the data based on the "Contract No" field in descending order
               data.sort((a, b) => int.parse(b['Contract No']).compareTo(int.parse(a['Contract No'])));
-
 
               // Set filtered data to display based on the search
               filteredData = data;
 
               return ListView.builder(
-        itemCount: filteredData.length,
-        itemBuilder: (_, index) {
-          Map<String, dynamic> report = filteredData[index];
+                itemCount: filteredData.length,
+                itemBuilder: (_, index) {
+                  Map<String, dynamic> report = filteredData[index];
 
-          return GestureDetector(
-  onTap: () {
-    String contractNo = report['Contract No'] ?? '';
+                  return GestureDetector(
+                    onTap: () {
+                      String contractNo = report['Contract No'] ?? '';
 
-    if (contractNo.isNotEmpty) {
-      FirebaseFirestore.instance
-          .collection('report')
-          .where('Contract No', isEqualTo: contractNo)
-          .get()
-          .then((querySnapshot) {
-        if (querySnapshot.docs.isNotEmpty) {
-          // Assuming Contract No is unique; if not, you may need to handle multiple docs
-          DocumentSnapshot doc = querySnapshot.docs.first;
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (_) => editnote(docid: doc),
-            ),
-          );
-        } else {
-          print('Document does not exist for Contract No: $contractNo');
-        }
-      }).catchError((error) {
-        print('Error retrieving document: $error');
-      });
-    } else {
-      print('Contract No is empty or null.');
-    }
-  },
-
-
+                      if (contractNo.isNotEmpty) {
+                        FirebaseFirestore.instance.collection('report').where('Contract No', isEqualTo: contractNo).get().then((querySnapshot) {
+                          if (querySnapshot.docs.isNotEmpty) {
+                            // Assuming Contract No is unique; if not, you may need to handle multiple docs
+                            DocumentSnapshot doc = querySnapshot.docs.first;
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => editnote(docid: doc),
+                              ),
+                            );
+                          } else {
+                            print('Document does not exist for Contract No: $contractNo');
+                          }
+                        }).catchError((error) {
+                          print('Error retrieving document: $error');
+                        });
+                      } else {
+                        print('Contract No is empty or null.');
+                      }
+                    },
                     child: Column(
                       children: [
                         const SizedBox(
                           height: 4,
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                            left: 3,
-                            right: 3,
-                          ),
-                          child: ListTile(
+                          padding: const EdgeInsets.only(left: 4, right: 4),
+                          child: Card(
+                            color: Colors.white, // Set the background color to white
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
                               side: const BorderSide(
                                 color: Colors.black,
                               ),
                             ),
-                            title: Text(
-                              'Contract No: ${report['Contract No']}',
-                              style: const TextStyle(
-                                fontSize: 20,
+                            child: ListTile(
+                              title: Text(
+                                'Contract No: ${report['Contract No']}',
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                ),
                               ),
-                            ),
-                            subtitle: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Date : ${report['Date']}'),
-                                Text('Buyer: ${report['Buyer']}'),
-                                Text('Seller: ${report['Seller']}'),
-                                // Add more fields as needed
-                              ],
-                            ),
-                            contentPadding: const EdgeInsets.symmetric(
-                              vertical: 12,
-                              horizontal: 16,
+                              subtitle: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text('Date: ${report['Date']}'),
+                                  Text('Buyer: ${report['Buyer']}'),
+                                  Text('Seller: ${report['Seller']}'),
+                                  // Add more fields as needed
+                                ],
+                              ),
+                              contentPadding: const EdgeInsets.symmetric(
+                                vertical: 12,
+                                horizontal: 16,
+                              ),
                             ),
                           ),
                         ),
@@ -338,26 +258,26 @@ class DataSearch extends SearchDelegate<String> {
   DataSearch(this.data);
 
   @override
-List<Widget> buildActions(BuildContext context) {
-  return [
-    IconButton(
-      icon: const Icon(Icons.clear, color: Colors.white),
-      onPressed: () {
-        query = '';
-      },
-    ),
-  ];
-}
+  List<Widget> buildActions(BuildContext context) {
+    return [
+      IconButton(
+        icon: const Icon(Icons.clear, color: Colors.white),
+        onPressed: () {
+          query = '';
+        },
+      ),
+    ];
+  }
 
   @override
-Widget buildLeading(BuildContext context) {
-  return IconButton(
-    icon: const Icon(Icons.arrow_back, color: Colors.white),
-    onPressed: () {
-      close(context, '');
-    },
-  );
-}
+  Widget buildLeading(BuildContext context) {
+    return IconButton(
+      icon: const Icon(Icons.arrow_back, color: Colors.black),
+      onPressed: () {
+        close(context, '');
+      },
+    );
+  }
 
   @override
   Widget buildResults(BuildContext context) {
@@ -395,32 +315,28 @@ Widget buildLeading(BuildContext context) {
             ],
           ),
           onTap: () {
-  String contractNo = report['Contract No'] as String;
-  if (contractNo.isNotEmpty) {
-    FirebaseFirestore.instance.collection('report')
-        .where('Contract No', isEqualTo: contractNo)
-        .get()
-        .then((querySnapshot) {
-      if (querySnapshot.docs.isNotEmpty) {
-        // Assuming Contract No is unique; if not, you may need to handle multiple docs
-        DocumentSnapshot doc = querySnapshot.docs.first;
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (_) => editnote(docid: doc),
-          ),
-        );
-      } else {
-        print('Document does not exist for Contract No: $contractNo');
-      }
-    }).catchError((error) {
-      print('Error retrieving document: $error');
-    });
-  } else {
-    print('Contract No is empty or null.');
-  }
-},
-
+            String contractNo = report['Contract No'] as String;
+            if (contractNo.isNotEmpty) {
+              FirebaseFirestore.instance.collection('report').where('Contract No', isEqualTo: contractNo).get().then((querySnapshot) {
+                if (querySnapshot.docs.isNotEmpty) {
+                  // Assuming Contract No is unique; if not, you may need to handle multiple docs
+                  DocumentSnapshot doc = querySnapshot.docs.first;
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => editnote(docid: doc),
+                    ),
+                  );
+                } else {
+                  print('Document does not exist for Contract No: $contractNo');
+                }
+              }).catchError((error) {
+                print('Error retrieving document: $error');
+              });
+            } else {
+              print('Contract No is empty or null.');
+            }
+          },
         );
       },
     );

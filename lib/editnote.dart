@@ -31,42 +31,37 @@ class _editnoteState extends State<editnote> {
   late TextEditingController Others;
   late TextEditingController remarks;
 
- @override
-void initState() {
-  super.initState();
+  @override
+  void initState() {
+    super.initState();
 
-  print('widget.docid: ${widget.docid}');
-  Map<String, dynamic>? data = widget.docid.data() as Map<String, dynamic>?;
+    print('widget.docid: ${widget.docid}');
+    Map<String, dynamic>? data = widget.docid.data() as Map<String, dynamic>?;
 
-  contno = TextEditingController(text: data?['Contract No'] as String? ?? '');
-  date = TextEditingController(text: data?['Date'] as String? ?? '');
-  seller = TextEditingController(text: data?['Seller'] as String? ?? '');
-  buyer = TextEditingController(text: data?['Buyer'] as String? ?? '');
-  billingname = TextEditingController(text: data?['Billing Name'] as String? ?? '');
-  gstno = TextEditingController(text: data?['GST no'] as String? ?? '');
-  qual = TextEditingController(text: data?['Quality'] as String? ?? '');
-  Transport = TextEditingController(text: data?['Transport'] as String? ?? '');
-  quant = TextEditingController(text: data?['Quantity'] as String? ?? '');
-  yarn = TextEditingController(text: data?['Yarn'] as String? ?? '');
-  weight = TextEditingController(text: data?['Weight'] as String? ?? '');
-  ratem = TextEditingController(text: data?['Rate/m'] as String? ?? '');
-  delper = TextEditingController(text: data?['Delivery Period'] as String? ?? '');
-  PC = TextEditingController(text: data?['Payment Condition'] as String? ?? '');
-  brokerage = TextEditingController(text: data?['Brokerage'] as String? ?? '');
-  Others = TextEditingController(text: data?['Others'] as String? ?? '');
-  remarks = TextEditingController(text: data?['Remarks'] as String? ?? '');
+    contno = TextEditingController(text: data?['Contract No'] as String? ?? '');
+    date = TextEditingController(text: data?['Date'] as String? ?? '');
+    seller = TextEditingController(text: data?['Seller'] as String? ?? '');
+    buyer = TextEditingController(text: data?['Buyer'] as String? ?? '');
+    billingname = TextEditingController(text: data?['Billing Name'] as String? ?? '');
+    gstno = TextEditingController(text: data?['GST no'] as String? ?? '');
+    qual = TextEditingController(text: data?['Quality'] as String? ?? '');
+    Transport = TextEditingController(text: data?['Transport'] as String? ?? '');
+    quant = TextEditingController(text: data?['Quantity'] as String? ?? '');
+    yarn = TextEditingController(text: data?['Yarn'] as String? ?? '');
+    weight = TextEditingController(text: data?['Weight'] as String? ?? '');
+    ratem = TextEditingController(text: data?['Rate/m'] as String? ?? '');
+    delper = TextEditingController(text: data?['Delivery Period'] as String? ?? '');
+    PC = TextEditingController(text: data?['Payment Condition'] as String? ?? '');
+    brokerage = TextEditingController(text: data?['Brokerage'] as String? ?? '');
+    Others = TextEditingController(text: data?['Others'] as String? ?? '');
+    remarks = TextEditingController(text: data?['Remarks'] as String? ?? '');
 
-  if (data != null) {
-    print('Retrieved data: $data');
-  } else {
-    print('Error retrieving data: Data is null');
+    if (data != null) {
+      print('Retrieved data: $data');
+    } else {
+      print('Error retrieving data: Data is null');
+    }
   }
-}
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +71,7 @@ void initState() {
         actions: [
           MaterialButton(
             onPressed: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => const Home()));
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Home()));
             },
             child: const Text(
               "Back",
@@ -108,8 +102,7 @@ void initState() {
                 'Others': Others.text,
                 'Remarks': remarks.text
               }).whenComplete(() {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => const Home()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Home()));
               });
             },
             child: const Text(
@@ -123,8 +116,7 @@ void initState() {
           MaterialButton(
             onPressed: () {
               widget.docid.reference.delete().whenComplete(() {
-                Navigator.pushReplacement(
-                    context, MaterialPageRoute(builder: (_) => const Home()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Home()));
               });
             },
             child: const Text(
@@ -145,13 +137,27 @@ void initState() {
                 height: 20,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                // padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: contno,
                   decoration: const InputDecoration(
-                     hintText: 'Contract No',
+                    hintText: 'Contract No',
                     labelText: 'Contract No', // Set the label text
-                  floatingLabelBehavior: FloatingLabelBehavior.never,
+                    // floatingLabelBehavior: FloatingLabelBehavior.never,
                   ),
                 ),
               ),
@@ -159,7 +165,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: date,
                   maxLines: null,
@@ -173,7 +192,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: seller,
                   maxLines: null,
@@ -187,7 +219,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: buyer,
                   maxLines: null,
@@ -201,7 +246,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: billingname,
                   maxLines: null,
@@ -215,7 +273,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: gstno,
                   maxLines: null,
@@ -229,7 +300,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: qual,
                   maxLines: null,
@@ -243,7 +327,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: quant,
                   maxLines: null,
@@ -257,7 +354,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: Transport,
                   maxLines: null,
@@ -271,7 +381,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: yarn,
                   maxLines: null,
@@ -285,13 +408,25 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: weight,
                   maxLines: null,
                   decoration: const InputDecoration(
                     hintText: 'Weight',
-
                     labelText: 'Weight',
                   ),
                 ),
@@ -300,7 +435,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: ratem,
                   maxLines: null,
@@ -314,7 +462,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: delper,
                   maxLines: null,
@@ -328,7 +489,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: PC,
                   maxLines: null,
@@ -342,7 +516,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: brokerage,
                   maxLines: null,
@@ -356,7 +543,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: Others,
                   maxLines: null,
@@ -370,7 +570,20 @@ void initState() {
                 height: 10,
               ),
               Container(
-                decoration: BoxDecoration(border: Border.all()),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(),
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.9),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 3),
+                    ),
+                  ],
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 10),
                 child: TextField(
                   controller: remarks,
                   maxLines: null,

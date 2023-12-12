@@ -43,8 +43,7 @@ class _addnoteState extends State<addnote> {
     DateTime now = DateTime.now();
 
     // Format the date as DD/MM/YYYY
-    String formattedDate =
-        "${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year}";
+    String formattedDate = "${now.day.toString().padLeft(2, '0')}/${now.month.toString().padLeft(2, '0')}/${now.year}";
 
     // Set the formatted date to the 'date' controller
     date.text = formattedDate;
@@ -57,58 +56,51 @@ class _addnoteState extends State<addnote> {
         backgroundColor: const Color.fromARGB(255, 0, 11, 133),
         actions: [
           MaterialButton(
-  onPressed: () {
-    // Check if the Contract No field is not empty
-    if (contno.text.isNotEmpty) {
-      // Add the data to Firestore
-      ref.add({
-               
-                'Contract No': contno.text,
-                'Date': date.text,
-                'Seller': seller.text,
-                'Buyer': buyer.text,
-                'Billing Name': billingname.text,
-                'GST no': gstno.text,
-                'Quality': qual.text,
-                'Transport': Transport.text,
-                'Quantity': quant.text,
-                
-                'Yarn': yarn.text,
-                'Weight': weight.text,
-                'Rate/m': ratem.text,
-                'Delivery Period': delper.text,
-                'Payment Condition': PC.text,
-                'Brokerage': brokerage.text,
-                'Others': Others.text,
-                'Remarks': remarks.text
-
-
-
-              }).whenComplete(() {
-        Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const Home()));
-      });
-    } else {
-      // Show a message if Contract No is not filled
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: const Text('Contract No cannot be empty.'),
-        ),
-      );
-    }
-  },
-  child: const Text(
-    "Save",
-    style: TextStyle(
-      fontSize: 20,
-      color: Color.fromARGB(255, 251, 251, 251),
-    ),
-  ),
-),
-MaterialButton(
             onPressed: () {
-              Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (_) => const Home()));
+              // Check if the Contract No field is not empty
+              if (contno.text.isNotEmpty) {
+                // Add the data to Firestore
+                ref.add({
+                  'Contract No': contno.text,
+                  'Date': date.text,
+                  'Seller': seller.text,
+                  'Buyer': buyer.text,
+                  'Billing Name': billingname.text,
+                  'GST no': gstno.text,
+                  'Quality': qual.text,
+                  'Transport': Transport.text,
+                  'Quantity': quant.text,
+                  'Yarn': yarn.text,
+                  'Weight': weight.text,
+                  'Rate/m': ratem.text,
+                  'Delivery Period': delper.text,
+                  'Payment Condition': PC.text,
+                  'Brokerage': brokerage.text,
+                  'Others': Others.text,
+                  'Remarks': remarks.text
+                }).whenComplete(() {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Home()));
+                });
+              } else {
+                // Show a message if Contract No is not filled
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: const Text('Contract No cannot be empty.'),
+                  ),
+                );
+              }
+            },
+            child: const Text(
+              "Save",
+              style: TextStyle(
+                fontSize: 20,
+                color: Color.fromARGB(255, 251, 251, 251),
+              ),
+            ),
+          ),
+          MaterialButton(
+            onPressed: () {
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Home()));
             },
             child: const Text(
               "Back",
@@ -120,18 +112,32 @@ MaterialButton(
           ),
         ],
       ),
-      
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(
+              height: 10,
+            ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: contno,
                 keyboardType: TextInputType.number,
-
                 decoration: const InputDecoration(
-                   hintText: 'Contract No',
+                  hintText: 'Contract No',
                   labelText: 'Contract No', // Set the label text
                   // floatingLabelBehavior: FloatingLabelBehavior.never,
                 ),
@@ -141,7 +147,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: date,
                 decoration: const InputDecoration(
@@ -154,7 +173,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: seller,
                 decoration: const InputDecoration(
@@ -167,7 +199,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: buyer,
                 decoration: const InputDecoration(
@@ -180,7 +225,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: billingname,
                 decoration: const InputDecoration(
@@ -193,7 +251,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: gstno,
                 decoration: const InputDecoration(
@@ -206,7 +277,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: qual,
                 decoration: const InputDecoration(
@@ -219,7 +303,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: quant,
                 decoration: const InputDecoration(
@@ -232,7 +329,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: Transport,
                 decoration: const InputDecoration(
@@ -245,7 +355,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: yarn,
                 decoration: const InputDecoration(
@@ -258,7 +381,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: weight,
                 decoration: const InputDecoration(
@@ -271,7 +407,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: ratem,
                 decoration: const InputDecoration(
@@ -284,7 +433,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: delper,
                 decoration: const InputDecoration(
@@ -297,7 +459,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: PC,
                 decoration: const InputDecoration(
@@ -310,7 +485,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: brokerage,
                 decoration: const InputDecoration(
@@ -323,7 +511,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: Others,
                 decoration: const InputDecoration(
@@ -336,7 +537,20 @@ MaterialButton(
               height: 10,
             ),
             Container(
-              decoration: BoxDecoration(border: Border.all()),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(),
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.9),
+                    spreadRadius: 2,
+                    blurRadius: 10,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
+              ),
+              padding: EdgeInsets.symmetric(horizontal: 10),
               child: TextField(
                 controller: remarks,
                 decoration: const InputDecoration(
@@ -348,8 +562,6 @@ MaterialButton(
             const SizedBox(
               height: 10,
             ),
-
-
           ],
         ),
       ),
