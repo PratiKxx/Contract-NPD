@@ -115,9 +115,32 @@ class _editnoteState extends State<editnote> {
           ),
           MaterialButton(
             onPressed: () {
-              widget.docid.reference.delete().whenComplete(() {
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Home()));
-              });
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text("Confirm Deletion"),
+                    content: const Text("Are you certain you want to delete this contract?"),
+                    actions: [
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pop(context); // Close the dialog
+                        },
+                        child: const Text("No"),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          // Delete the contract
+                          widget.docid.reference.delete().whenComplete(() {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Home()));
+                          });
+                        },
+                        child: const Text("Yes"),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
             child: const Text(
               "Delete",

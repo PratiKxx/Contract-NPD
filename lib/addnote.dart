@@ -36,6 +36,7 @@ class _addnoteState extends State<addnote> {
     super.initState();
     // Set the initial value of the 'date' controller to the current date
     setDate();
+    getContractCount();
   }
 
   void setDate() {
@@ -49,6 +50,20 @@ class _addnoteState extends State<addnote> {
     date.text = formattedDate;
   }
 
+  Future<void> getContractCount() async {
+    // Get the count of existing contracts
+    QuerySnapshot querySnapshot = await ref.get();
+    int contractCount = querySnapshot.size + 1; // Increment by 1 for the new contract
+
+    // Set the next contract number to the 'contno' controller
+    contno.text = contractCount.toString();
+  }
+
+  Future<bool> isContractNoExists(String contractNo) async {
+    QuerySnapshot querySnapshot = await ref.where('Contract No', isEqualTo: contractNo).get();
+    return querySnapshot.docs.isNotEmpty;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,31 +71,43 @@ class _addnoteState extends State<addnote> {
         backgroundColor: const Color.fromARGB(255, 0, 11, 133),
         actions: [
           MaterialButton(
-            onPressed: () {
+            onPressed: () async {
               // Check if the Contract No field is not empty
               if (contno.text.isNotEmpty) {
-                // Add the data to Firestore
-                ref.add({
-                  'Contract No': contno.text,
-                  'Date': date.text,
-                  'Seller': seller.text,
-                  'Buyer': buyer.text,
-                  'Billing Name': billingname.text,
-                  'GST no': gstno.text,
-                  'Quality': qual.text,
-                  'Transport': Transport.text,
-                  'Quantity': quant.text,
-                  'Yarn': yarn.text,
-                  'Weight': weight.text,
-                  'Rate/m': ratem.text,
-                  'Delivery Period': delper.text,
-                  'Payment Condition': PC.text,
-                  'Brokerage': brokerage.text,
-                  'Others': Others.text,
-                  'Remarks': remarks.text
-                }).whenComplete(() {
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Home()));
-                });
+                // Check if the contract number already exists
+                bool contractExists = await isContractNoExists(contno.text);
+
+                if (contractExists) {
+                  // Show a message if Contract No already exists
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: const Text('This Contract No already exists.'),
+                    ),
+                  );
+                } else {
+                  // Add the data to Firestore
+                  ref.add({
+                    'Contract No': contno.text,
+                    'Date': date.text,
+                    'Seller': seller.text,
+                    'Buyer': buyer.text,
+                    'Billing Name': billingname.text,
+                    'GST no': gstno.text,
+                    'Quality': qual.text,
+                    'Transport': Transport.text,
+                    'Quantity': quant.text,
+                    'Yarn': yarn.text,
+                    'Weight': weight.text,
+                    'Rate/m': ratem.text,
+                    'Delivery Period': delper.text,
+                    'Payment Condition': PC.text,
+                    'Brokerage': brokerage.text,
+                    'Others': Others.text,
+                    'Remarks': remarks.text
+                  }).whenComplete(() {
+                    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const Home()));
+                  });
+                }
               } else {
                 // Show a message if Contract No is not filled
                 ScaffoldMessenger.of(context).showSnackBar(
